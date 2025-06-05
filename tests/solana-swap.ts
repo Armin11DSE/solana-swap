@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
 import * as anchor from "@coral-xyz/anchor";
-import { BN, type Program } from "@coral-xyz/anchor";
+import BN from "bn.js"
 import {
   TOKEN_2022_PROGRAM_ID,
   type TOKEN_PROGRAM_ID,
@@ -31,7 +31,7 @@ const getRandomBigNumber = (size = 8) => {
   return new BN(randomBytes(size));
 };
 
-describe("swap", async () => {
+describe("solana-swap", () => {
   // Use the cluster and the keypair from Anchor.toml
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
@@ -42,7 +42,7 @@ describe("swap", async () => {
 
   const connection = provider.connection;
 
-  const program = anchor.workspace.SolanaSwap as Program<SolanaSwap>;
+  const program = anchor.workspace.SolanaSwap as anchor.Program<SolanaSwap>;
 
   // We're going to reuse these accounts across multiple tests
   const accounts: Record<string, PublicKey> = {
